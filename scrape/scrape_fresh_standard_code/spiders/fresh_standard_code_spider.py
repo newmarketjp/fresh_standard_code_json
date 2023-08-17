@@ -114,6 +114,11 @@ class FreshStandardCodeSpider(scrapy.Spider):
         fresh_standard_codes = {}
         for i, r in df.iterrows():
             try:
+                if r["standard_name"] == "モラードバナナ" and r["vegefru_code"] == 49262:
+                    # モラードバナナのベジフルコードは49162だけど、699のみ49262となっている。
+                    # おそらくミスなので補正する
+                    r["vegefru_code"] = 49162
+
                 item = {}
                 item["standard_name"] = r["standard_name"]
                 item["header_code"] = r["header_code"]
@@ -158,6 +163,7 @@ class FreshStandardCodeSpider(scrapy.Spider):
         vegefru_map = {}
         for k, v in fresh_standard_codes.items():
             key1 = v["vegefru_code"]
+
             if not key1 in vegefru_map.keys():
                 vegefru_map[key1] = {
                     "standard_name": v["standard_name"],

@@ -52,6 +52,20 @@ def test_parse_vegefru_item1():
     assert_item(items, "4922396400997", "ルジナ", 4922, 39640, 0, 9, 9, 7)
     print("count: {}".format(len(items)))
 
+def test_parse_vegefru_item2():
+    # モラードバナナのコード値のミスを補正する
+    df = pd.read_excel("./test_parse/seikalist20230401.xlsx", sheet_name="商品コードリスト(果物)")
+    spider = FreshStandardCodeSpider()
+    FreshStandardCodeSpider.dist_path = "./test_parse/dist"
+    df = spider.cleansing_dataframe(df)
+    items = spider.parse_vegefru_items(df)
+    spider.write_json("fresh_standard_codes.json", items)
+
+    assert_item(items, "4922491626001", "モラードバナナ", 4922, 49162, 6, 0, 0, 1)
+    assert_item(items, "4922491626995", "モラードバナナ", 4922, 49162, 6, 9, 9, 5)
+#    assert_item(items, "4922492626995", "モラードバナナ", 4922, 49262, 6, 9, 9, 5) # 49262の場合、check digitは4が正しい
+    print("count: {}".format(len(items)))
+
 
 def test_generatee_vegefru_pvs_map1():
     df = pd.read_excel("./test_parse/seikalist20230401.xlsx")
