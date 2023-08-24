@@ -74,7 +74,7 @@ def test_generatee_vegefru_pvs_map1():
     df = spider.cleansing_dataframe(df)
     items = spider.parse_vegefru_items(df)
 
-    vegefru_pvs_map = spider.generatee_vegefru_pvs_map(items)
+    vegefru_pvs_map = spider.generate_vegefru_pvs_map(items)
     spider.write_json("vegefru_pvs_map.json", vegefru_pvs_map)
 
 
@@ -109,7 +109,7 @@ def test_generate_size_enums1():
     df = spider.cleansing_dataframe(df)
     items = spider.parse_vegefru_items(df)
 
-    enums = spider.generatee_size_enums(items)
+    enums = spider.generate_size_enums(items)
     spider.write_json("size_enums.json", enums)
 
     assert not 1 in enums[30100].keys()
@@ -139,7 +139,7 @@ def test_generate_growing_method_enums1():
     df = spider.cleansing_dataframe(df)
     items = spider.parse_vegefru_items(df)
 
-    enums = spider.generatee_growing_method_enums(items)
+    enums = spider.generate_growing_method_enums(items)
     spider.write_json("growing_method_enums.json", enums)
 
     assert not 6 in enums[30100].keys()

@@ -128,7 +128,7 @@ class FreshStandardCodeSpider(scrapy.Spider):
                 item["size"] = r["s"]
                 item["check_digit"] = r["c/d"]
 
-                # コード値ガアル場合
+                # コード値がある場合
                 if r["p"] > 0:
                     item["growing_method_label"] = r["growing_method"]
                 if r["v"] > 0:
@@ -152,7 +152,7 @@ class FreshStandardCodeSpider(scrapy.Spider):
 
         return fresh_standard_codes
 
-    def generatee_vegefru_pvs_map(self, fresh_standard_codes):
+    def generate_vegefru_pvs_map(self, fresh_standard_codes):
         """
         fresh_standard_codeのマップをvegefru_code,PVSの2段階のキー構造に変更する
 
@@ -180,7 +180,7 @@ class FreshStandardCodeSpider(scrapy.Spider):
             }
         return vegefru_map
 
-    def generatee_growing_method_enums(self, fresh_standard_codes):
+    def generate_growing_method_enums(self, fresh_standard_codes):
         """
         青果標準商品コード内で実際に使われているPのENUM値を生成する。
         ※Pの値は品目によって変化しないので、ENUM値の生成は必要ない。
@@ -202,9 +202,9 @@ class FreshStandardCodeSpider(scrapy.Spider):
         :param fresh_standard_codes: 青果標準コードのマップ
         :return: {vegefru_code:{P値:Pのラベル名}} のdict形式を返す
         """
-        return self._generatee_enums("growing_method", fresh_standard_codes)
+        return self._generate_enums("growing_method", fresh_standard_codes)
 
-    def generatee_size_enums(self, fresh_standard_codes):
+    def generate_size_enums(self, fresh_standard_codes):
         """
         青果標準商品コード内で実際に使われているSのENUM値を生成する。
         ※Sの値は品目によって変化しないので、ENUM値の生成は必要ない。
@@ -227,7 +227,7 @@ class FreshStandardCodeSpider(scrapy.Spider):
         :param fresh_standard_codes: 青果標準コードのマップ
         :return: {vegefru_code:{S値:Sのラベル名}} のdict形式を返す
         """
-        return self._generatee_enums("size", fresh_standard_codes)
+        return self._generate_enums("size", fresh_standard_codes)
 
     def generatee_volume_enums(self, fresh_standard_codes):
         """
@@ -237,9 +237,9 @@ class FreshStandardCodeSpider(scrapy.Spider):
         :param fresh_standard_codes: 青果標準コードのマップ
         :return: {vegefru_code:{V値:Vのラベル名}} のdict形式を返す
         """
-        return self._generatee_enums("volume", fresh_standard_codes)
+        return self._generate_enums("volume", fresh_standard_codes)
 
-    def _generatee_enums(self, key, fresh_standard_codes):
+    def _generate_enums(self, key, fresh_standard_codes):
         """
         keyを渡す事で各データ行の重複を削除したENUM値を生成する
 

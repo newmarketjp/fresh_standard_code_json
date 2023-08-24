@@ -29,7 +29,7 @@ class VegefruPVSWriterPipeline:
     def process_item(self, item, spider):
         fresh_standard_codes = item["fresh_standard_codes"]
         # 青果標準商品コード一覧をベジフルコードとPVSで正規化したマップをJSON形式で出力する
-        vegefru_pvs_map = spider.generatee_vegefru_pvs_map(fresh_standard_codes)
+        vegefru_pvs_map = spider.generate_vegefru_pvs_map(fresh_standard_codes)
         spider.write_json("vegefru_pvs.json", vegefru_pvs_map)
 
         return item
@@ -40,7 +40,7 @@ class GrowingMethodEnumsWriterPipeline:
         fresh_standard_codes = item["fresh_standard_codes"]
 
         # growing_method(P)のenum値をJSON形式で出力する
-        growing_method_enums = spider.generatee_growing_method_enums(fresh_standard_codes)
+        growing_method_enums = spider.generate_growing_method_enums(fresh_standard_codes)
         spider.write_json("growing_method_enums.json", growing_method_enums)
 
         return item
@@ -62,7 +62,7 @@ class SizeEnumsWriterPipeline:
         fresh_standard_codes = item["fresh_standard_codes"]
 
         # sizeのenum値をJSON形式で出力する
-        size_enums = spider.generatee_size_enums(fresh_standard_codes)
+        size_enums = spider.generate_size_enums(fresh_standard_codes)
         spider.write_json("size_enums.json", size_enums)
 
         return item
